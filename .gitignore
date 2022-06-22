@@ -1,0 +1,3 @@
+test_items/.pytest_cache/
+.idea/
+test_items/__pycache__/
