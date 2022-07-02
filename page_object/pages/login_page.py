@@ -15,13 +15,13 @@ class LoginPage(BasePage):
         assert actual_url == expected_url, "Actual url is not expected one"
 
     def should_be_login_forms(self):
-        assert self.is_element_present(*LoginPageLocators.LOGIN_FORM_USERNAME), "Login username form is not presented"
-        assert self.is_element_present(*LoginPageLocators.LOGIN_FORM_PASSWORD), "Login password form is not presented"
+        assert self.is_element_present(*LoginPageLocators.FORM_USERNAME), "Login username form is not presented"
+        assert self.is_element_present(*LoginPageLocators.FORM_PASSWORD), "Login password form is not presented"
 
     def should_be_registration_forms(self):
-        assert self.is_element_present(*LoginPageLocators.LOGIN_REGISTER_FORM_EMAIL), \
+        assert self.is_element_present(*LoginPageLocators.REGISTER_FORM_EMAIL), \
             "Login registration email form is not presented"
-        assert self.is_element_present(*LoginPageLocators.LOGIN_REGISTER_FORM_PASSWORD), \
+        assert self.is_element_present(*LoginPageLocators.REGISTER_FORM_PASSWORD), \
             "Login registration password form is not presented"
-        assert self.is_element_present(*LoginPageLocators.LOGIN_REGISTER_FORM_CONFIRM_PASSWORD), \
+        assert self.is_element_present(*LoginPageLocators.REGISTER_FORM_CONFIRM_PASSWORD), \
             "Login registration confirm password form is not presented"
