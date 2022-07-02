@@ -1,4 +1,4 @@
-from page_object.pages.main_page import MainPage
+from book_store.pages.main_page import MainPage
 
 
 def test_guest_can_go_to_login_page(browser):
