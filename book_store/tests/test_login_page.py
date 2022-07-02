@@ -1,4 +1,4 @@
-from page_object.pages.login_page import LoginPage
+from book_store.pages.login_page import LoginPage
 
 
 def test_should_be_login_forms(browser):
