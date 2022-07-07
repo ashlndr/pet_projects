@@ -24,6 +24,17 @@ class BasePage:
     def should_be_login_link(self):
         assert self.browser.find_element(*BasePageLocators.LOGIN_LINK), "Login link is not presented"
 
+    def go_to_basket_via_cite_header_button(self):
+        basket_button = self.browser.find_element(*BasePageLocators.BASKET_BUTTON)
+        basket_button.click()
+
+    def check_empty_basket_text(self, language_text):
+        basket_button = self.browser.find_element(*BasePageLocators.BASKET_IS_EMPTY_ELEMENT)
+        assert language_text in basket_button.text, f"Actual basket text is: {basket_button.text}."
+
+    def check_basket_is_empty(self):
+        assert self.is_element_present(*BasePageLocators.BASKET_IS_EMPTY_ELEMENT), "Basket is not empty!"
+
     def is_element_present(self, how, what):
         try:
             self.browser.find_element(how, what)

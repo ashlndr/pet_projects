@@ -1,6 +1,7 @@
 import pytest
 
 from book_store.pages.product_page import ProductPage
+from book_store.constants.text_elements import empty_basket_text
 
 
 @pytest.mark.skip
@@ -55,3 +56,13 @@ def test_guest_can_go_to_login_page_from_product_page(browser):
     page = ProductPage(browser, link)
     page.open_page()
     page.go_to_login_page()
+
+
+@pytest.mark.parametrize("language", [*empty_basket_text.keys()])
+def test_guest_cant_see_product_in_basket_opened_from_product_page(browser, language):
+    link = f"http://selenium1py.pythonanywhere.com/{language}"
+    page = ProductPage(browser, link)
+    page.open_page()
+    page.go_to_basket_via_cite_header_button()
+    page.check_basket_is_empty()
+    page.check_empty_basket_text(empty_basket_text[language])
