@@ -25,3 +25,14 @@ class LoginPage(BasePage):
             "Login registration password form is not presented"
         assert self.is_element_present(*LoginPageLocators.REGISTER_FORM_CONFIRM_PASSWORD), \
             "Login registration confirm password form is not presented"
+
+    def register_new_user(self, email, password):
+        email_form = self.browser.find_element(*LoginPageLocators.REGISTER_FORM_EMAIL)
+        password_form = self.browser.find_element(*LoginPageLocators.REGISTER_FORM_PASSWORD)
+        password_confirm_form = self.browser.find_element(*LoginPageLocators.REGISTER_FORM_CONFIRM_PASSWORD)
+        submit_button = self.browser.find_element(*LoginPageLocators.REGISTER_SUBMIT_BUTTON)
+        email_form.send_keys(email)
+        password_form.send_keys(password)
+        password_confirm_form.send_keys(password)
+        submit_button.click()
+        self.is_not_element_present(*LoginPageLocators.SUCCESSFUL_REGISTRATION, timeout=20)

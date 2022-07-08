@@ -3,15 +3,15 @@ from selenium.webdriver.common.by import By
 
 class BasePageLocators:
 
-    LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
-    LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
+    LOGIN_LINK = (By.ID, "registration_link")
     BASKET_BUTTON = (By.CSS_SELECTOR, ".basket-mini a.btn.btn-default")
     BASKET_IS_EMPTY_ELEMENT = (By.CSS_SELECTOR, "#content_inner > p")
+    USER_ICON = (By.CSS_SELECTOR, ".icon-user")
 
 
 class MainPageLocators:
 
-    LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
+    LOGIN_LINK = (By.ID, "login_link")
 
 
 class LoginPageLocators:
@@ -21,6 +21,8 @@ class LoginPageLocators:
     REGISTER_FORM_EMAIL = (By.ID, "id_registration-email")
     REGISTER_FORM_PASSWORD = (By.ID, "id_registration-password1")
     REGISTER_FORM_CONFIRM_PASSWORD = (By.ID, "id_registration-password2")
+    REGISTER_SUBMIT_BUTTON = (By.CSS_SELECTOR, "button[name='registration_submit']")
+    SUCCESSFUL_REGISTRATION = (By.CSS_SELECTOR, "div.alertinner.wicon")
 
 
 class ProductPageLocators:
@@ -31,3 +33,4 @@ class ProductPageLocators:
     PRODUCT_NAME_ON_PAGE = (By.CSS_SELECTOR, "div.product_main h1:nth-child(n)")
     PRODUCT_PRICE_ON_PAGE = (By.CSS_SELECTOR, "p.price_color")
     SUCCESS_MESSAGE = (By.CSS_SELECTOR, "div#messages div:nth-child(1)")
+    LOGIN_LINK = (By.ID, "login_link")

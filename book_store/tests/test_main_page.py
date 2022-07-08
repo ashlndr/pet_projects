@@ -1,21 +1,24 @@
 import pytest
 
+from book_store.constants.links import main_page_link
 from book_store.pages.main_page import MainPage
 from book_store.constants.text_elements import empty_basket_text
 
 
-def test_guest_can_go_to_login_page(browser):
-    link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209?promo=midsummer"
-    page = MainPage(browser, link)
-    page.open_page()
-    page.go_to_login_page()
+@pytest.mark.login_guest
+class TestLoginGuest:
 
+    def test_guest_can_go_to_login_page(self, browser):
+        link = main_page_link
+        page = MainPage(browser, link)
+        page.open_page()
+        page.go_to_login_page()
 
-def test_guest_should_see_login_link(browser):
-    link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_29?promo=midsummer"
-    page = MainPage(browser, link)
-    page.open_page()
-    page.should_be_login_link()
+    def test_guest_should_see_login_link(self, browser):
+        link = main_page_link
+        page = MainPage(browser, link)
+        page.open_page()
+        page.should_be_login_link()
 
 
 @pytest.mark.parametrize("language", [*empty_basket_text.keys()])

@@ -1,0 +1,2 @@
+class BasketPage:
+    pass

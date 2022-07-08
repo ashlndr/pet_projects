@@ -1,9 +1,10 @@
 import math
 
-from .locators import BasePageLocators
 from selenium.common.exceptions import NoAlertPresentException, NoSuchElementException, TimeoutException
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
+
+from .locators import BasePageLocators
 
 
 class BasePage:
@@ -16,10 +17,8 @@ class BasePage:
         self.browser.get(self.url)
 
     def go_to_login_page(self):
-        login_link = self.browser.find_element(*BasePageLocators.LOGIN_LINK_INVALID)
+        login_link = self.browser.find_element(*BasePageLocators.LOGIN_LINK)
         login_link.click()
-        alert = self.browser.switch_to_alert
-        alert.accept()
 
     def should_be_login_link(self):
         assert self.browser.find_element(*BasePageLocators.LOGIN_LINK), "Login link is not presented"
@@ -57,6 +56,16 @@ class BasePage:
             return False
         return True
 
+    def wait_for_element(self, how, what):
+        try:
+            element = WebDriverWait(self.browser, timeout=10, poll_frequency=1).until(
+                EC.presence_of_element_located(
+                    (how, what))
+            )
+        except NoSuchElementException as ex:
+            raise ex
+        return element
+
     def solve_quiz_and_get_code(self):
         alert = self.browser.switch_to.alert
         x = alert.text.split(" ")[2]
@@ -65,8 +74,10 @@ class BasePage:
         alert.accept()
         try:
             alert = self.browser.switch_to.alert
-            alert_text = alert.text
-            print(f"Your code: {alert_text}")
             alert.accept()
         except NoAlertPresentException:
             print("No second alert presented")
+
+    def should_be_authorized_user(self):
+        assert self.is_element_present(*BasePageLocators.USER_ICON), "User icon is not presented," \
+                                                                     " probably unauthorised user"
